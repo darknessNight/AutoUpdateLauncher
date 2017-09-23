@@ -1,0 +1,17 @@
+language: java
+
+jdk:
+  - oraclejdk8
+
+os:
+  - linux
+
+install:
+  - mvn test
+  - mvn package
+
+after_success:
+  - "mkdir AutoUpdateLauncherBin"
+  - "find -name *.jar -exec cp {} ./AutoUpdateLauncherBin/ \\;"
+  - "tar --gzip -cf AutoUpdateLauncher.tar.gz AutoUpdateLauncherBin"
+  - "curl --ftp-create-dirs -T AutoUpdateLauncher.tar.gz -u $FTP_USER:$FTP_PASS ftp://$FTP_SERVER/AutoUpdateLauncher/"
