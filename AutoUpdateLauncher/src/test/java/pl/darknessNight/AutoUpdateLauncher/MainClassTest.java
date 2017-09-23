@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 public class MainClassTest {
     @Test
     public void main() {
-        pl.darknessNight.AutoUpdateLauncher.MainClass.main(new String[1]);
+        pl.darknessNight.AutoUpdateLauncher.MainClass.main(new String[]{});
 
         assertTrue(true);
     }
