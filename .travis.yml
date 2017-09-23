@@ -16,3 +16,10 @@ after_success:
   - "curl --ftp-create-dirs -T AutoUpdateLauncher.tar.gz -u $FTP_USER:$FTP_PASS ftp://$FTP_SERVER/AutoUpdateLauncher/"
   - "mvn test cobertura:cobertura"
   - "bash <(curl -s https://codecov.io/bash)"
+  
+notifications:
+  email:
+    recipients:
+      - pawelprzytarski@hotmail.com
+    on_success: never
+    on_failure: always
