@@ -5,6 +5,14 @@
 	<artifactId>AutoUpdateLauncherProject</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
+	
+	<licenses>
+		<license>
+			<name>The MIT License (MIT)</name>
+		<url>http://opensource.org/licenses/MIT</url>
+		<distribution>repo</distribution>
+		</license>
+	</licenses>
 
 	<modules>
 		<module>/AutoUpdateLauncher</module>
@@ -21,6 +29,15 @@
 					<source>1.8</source>
 					<target>1.8</target>
 					<fork>true</fork>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+			<groupId>org.eluder.coveralls</groupId>
+			<artifactId>coveralls-maven-plugin</artifactId>
+			<version>4.3.0</version>
+			<configuration>
+					<repoToken>yourcoverallsprojectrepositorytoken</repoToken>
 				</configuration>
 			</plugin>
 		</plugins>
