@@ -1,5 +1,8 @@
 package pl.darknessNight.AutoUpdateLauncher;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Created by az on 2017-09-23.
  */
@@ -7,6 +10,6 @@ package pl.darknessNight.AutoUpdateLauncher;
 
 public class MainClass {
     public static void main(String[] args){
-        System.out.print("Hello");
+        Logger.getLogger("MainClass").log(Level.FINE,"It's okay");
     }
 }
