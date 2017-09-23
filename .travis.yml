@@ -15,4 +15,6 @@ after_success:
   - "find -name *.jar -exec cp {} ./AutoUpdateLauncherBin/ \\;"
   - "tar --gzip -cf AutoUpdateLauncher.tar.gz AutoUpdateLauncherBin"
   - "curl --ftp-create-dirs -T AutoUpdateLauncher.tar.gz -u $FTP_USER:$FTP_PASS ftp://$FTP_SERVER/AutoUpdateLauncher/"
-  - "mvn clean cobertura:cobertura org.eluder.coveralls:coveralls-maven-plugin:report"
+  - "cd AutoUpdateLauncher"
+  - "mvn test cobertura:cobertura"
+  - "bash <(curl -s https://codecov.io/bash)"
