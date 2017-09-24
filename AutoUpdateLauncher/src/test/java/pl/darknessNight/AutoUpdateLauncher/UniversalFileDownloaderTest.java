@@ -4,6 +4,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.stubbing.Answer;
 
+import java.nio.file.NotDirectoryException;
+
 import static org.mockito.Mockito.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -257,6 +259,45 @@ class UniversalFileDownloaderTest {
         fileDownloader.RemoveFileDownloader("TestCorrect");
 
         assertThrows(ProtocolNotSupported.class,()->fileDownloader.DownloadFileToDisc("TestCorrect:TestUrl",firstFileName));
+    }
+
+    @Test
+    void setTempLocation_IncorrectDir_throws(){
+        UniversalFileDownloader fileDownloader=new UniversalFileDownloader();
+
+        assertThrows(NotDirectoryException.class,()->fileDownloader.SetTempLocation("/dev/null/Test"));
+    }
+
+    @Test
+    void setTempLocation_CorrectDir_PassToExistingChildDownloaders() throws NotDirectoryException {
+        UniversalFileDownloader fileDownloader=new UniversalFileDownloader();
+
+        FileDownloader firstFakeDownloader=mock(FileDownloader.class);
+        FileDownloader secondFakeDownloader=mock(FileDownloader.class);
+
+        fileDownloader.AddFileDownloader("Test",firstFakeDownloader);
+        fileDownloader.AddFileDownloader("TestCorrect",secondFakeDownloader);
+
+        fileDownloader.SetTempLocation("./");
+
+        verify(firstFakeDownloader).SetTempLocation("./");
+        verify(secondFakeDownloader).SetTempLocation("./");
+    }
+
+    @Test
+    void setTempLocation_CorrectDir_PassToNewChildDownloaders() throws NotDirectoryException {
+        UniversalFileDownloader fileDownloader=new UniversalFileDownloader();
+
+        FileDownloader firstFakeDownloader=mock(FileDownloader.class);
+        FileDownloader secondFakeDownloader=mock(FileDownloader.class);
+
+        fileDownloader.SetTempLocation(".");
+
+        fileDownloader.AddFileDownloader("Test",firstFakeDownloader);
+        fileDownloader.AddFileDownloader("TestCorrect",secondFakeDownloader);
+
+        verify(firstFakeDownloader).SetTempLocation(".");
+        verify(secondFakeDownloader).SetTempLocation(".");
     }
 
 }

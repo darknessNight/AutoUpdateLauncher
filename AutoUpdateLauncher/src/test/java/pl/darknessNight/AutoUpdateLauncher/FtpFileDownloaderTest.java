@@ -112,4 +112,9 @@ class FtpFileDownloaderTest {
         assertThrows(DownloadError.class,()->fileDownloader.DownloadFileToTemp(testAddress));
     }
 
+    @Test
+    void FTPFileDownloader_DefaultConstructorTest_NoThrows(){
+        new FtpFileDownloader();
+    }
+
 }

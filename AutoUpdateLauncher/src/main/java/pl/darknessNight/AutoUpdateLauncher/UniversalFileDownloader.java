@@ -1,5 +1,6 @@
 package pl.darknessNight.AutoUpdateLauncher;
 
+import java.nio.file.NotDirectoryException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,8 +16,25 @@ class ProtocolNotSupported extends RuntimeException {
 public class UniversalFileDownloader extends FileDownloader {
     Map<String, FileDownloader> fileDownloaderMap = new HashMap<>();
 
+    @Override
+    public void SetTempLocation(String path) throws NotDirectoryException {
+        super.SetTempLocation(path);
+        fileDownloaderMap.forEach((s, fileDownloader) -> {
+            try {
+                fileDownloader.SetTempLocation(path);
+            } catch (NotDirectoryException e) {
+                //pass
+            }
+        });
+    }
+
     void AddFileDownloader(String protocol, FileDownloader fileDownloader) {
         fileDownloaderMap.put(protocol, fileDownloader);
+        try {
+            fileDownloader.SetTempLocation((tempLocation == null) ? null : tempLocation.getPath());
+        } catch (NotDirectoryException e) {
+            //pass
+        }
     }
 
     void RemoveFileDownloader(String protocol) {

@@ -6,6 +6,8 @@ import org.apache.commons.net.ftp.FTPReply;
 import java.io.IOException;
 import java.io.OutputStream;
 
+class LoginException extends RuntimeException{}
+
 public class FTPClient {
     org.apache.commons.net.ftp.FTPClient ftpLowLevelClient = null;
     FTPClient(){
@@ -50,8 +52,13 @@ public class FTPClient {
 
     public void ConnectToServerAndPrepareConnection(String host, String user, String pwd) throws IOException {
         ConnectToServer(host);
-        ftpLowLevelClient.login(user, pwd);
+        LoginToServer(user, pwd);
         PrepareConnection();
+    }
+
+    private void LoginToServer(String user, String pwd) throws IOException {
+        if(!ftpLowLevelClient.login(user, pwd))
+            throw new LoginException();
     }
 
     public void ConnectToServer(String host) throws IOException {
@@ -79,14 +86,14 @@ public class FTPClient {
     }
 
     public void Disconnect() {
-        if (this.ftpLowLevelClient.isConnected()) {
+        if (ftpLowLevelClient.isConnected()) {
             try {
-                this.ftpLowLevelClient.logout();
+                ftpLowLevelClient.logout();
             } catch (IOException f) {
                 //pass
             }
             try {
-                this.ftpLowLevelClient.disconnect();
+                ftpLowLevelClient.disconnect();
             } catch (IOException f) {
                 //pass
             }
