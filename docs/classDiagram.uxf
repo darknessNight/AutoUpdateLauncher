@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1070</x>
+      <y>0</y>
+      <w>210</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>&lt;&lt;class&gt;&gt;
+Main
+--
++ void main(String[])
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>520</x>
+      <y>160</y>
+      <w>310</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>ArgumentParser
+--
+-shortParamPrefix:String
+-longParamPrefix:String
+--
++GetHelpForParams(): String
++ParseArguments(ConfigurationManager):ConfigurationManager
++SetArgumentsStringList(String[]):void
++AddParameter(Parameter):void
++RemoveParameter(Parameter):void
++AddArgument(Argument):void
++AddArgument(Argument, position:int):void
++RemoveArgument(Argument):void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>0</x>
+      <y>440</y>
+      <w>210</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Parameter
+--
+
+--
++GetHelp():String
++ParseShortParameter(StringIterator, ConfigurationManager):StringIterator
++ParseLongParameter(StringIterator, ConfigurationManager):StringIterator</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>440</y>
+      <w>240</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Argument
+--
+
+--
++GetArgumentName():String
++GetArgumentHelp():String
++ParseArgument(StringIterator, ConfigurationManager):StringIterator</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1310</x>
+      <y>150</y>
+      <w>210</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>AutoUpdateAppStarter
+--
+
+--
++SetConfiguration(ConfigurationManager):void
++UpdateApp():void
++StartApp():void
++StartAppAndClose():void
++SetProgressStateGUI(ProgressDialog):void
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>90</x>
+      <y>180</y>
+      <w>270</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>ArgumentHelpConstructor
+--
+
+--
++SetListOfParams(List&lt;Params&gt;):void
++SetArrayOfArguments(Arguments[]):void
++SetDescriptionFromString(String[]):void
++SetDescriptionFromResource(ResourceID):void
++PrepareDescription():void
++GetDescription():String
++PrepareAndGetDescription():String</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>400</x>
+      <y>300</y>
+      <w>140</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;140.0;120.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>100</x>
+      <y>270</y>
+      <w>440</w>
+      <h>190</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-
+m1=0..n</panel_attributes>
+    <additional_attributes>10.0;170.0;420.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>350</x>
+      <y>210</y>
+      <w>190</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;170.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>820</x>
+      <y>50</y>
+      <w>270</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;110.0;250.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>540</x>
+      <y>450</y>
+      <w>430</w>
+      <h>170</h>
+    </coordinates>
+    <panel_attributes>ConfigurationManager
+--
+
+--
++GetValueOf(name:String):Object
++SetValueOf(name:String, value:Object):void
++GetSubConfiguration(type:class):type.class
++ReadConfigurationFromResource(ResourceID):void
++ReadConfigurationFromFile(filename:String):void
++ReadConfigurationFromMap(elements: Map&lt;String, object&gt;):void
++LoadDefaultConfiguration():void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>860</x>
+      <y>60</y>
+      <w>250</w>
+      <h>410</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;390.0;230.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1250</x>
+      <y>60</y>
+      <w>110</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>90.0;90.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1140</x>
+      <y>340</y>
+      <w>210</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>FileUpdater
+--
+
+--
++SetDownloadFilesDir(location:String):void
++SetTempLocation(location:String):void
++GetListOfOutdatedFiles():String[]
++DownloadOutdatedFiles(location:String, override:Boolean):void
++UpdateOutdatedFiles():void
++GetProgressState():ProgressState
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>860</x>
+      <y>710</y>
+      <w>210</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>FileDownloader
+--
+
+--
++SetTempLocation(String):void
++DownloadFileToMemery(URL: string):byte[]
++DownloadFileToDisc(URL:string, location:string):void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1520</x>
+      <y>340</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>AppStarter
+--
+
+--
++StartApp(filename:String):void
++StartAppInNewProcess(filename:String):void
++GetAppState():AppState
++CloseApp():void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1090</x>
+      <y>710</y>
+      <w>210</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>FileChecker
+--
+
+--
++GetChecksumOfFile(filename:String):String
++GetChecksumOfMemoryBlock(byte[]):String
++CompareFileChecksum(filename:string, checksum:string):boolean
++CompareMemoryBlockChecksum(data:byte[], checksum:string):boolean</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1010</x>
+      <y>480</y>
+      <w>150</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;230.0;130.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1480</x>
+      <y>270</y>
+      <w>100</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>80.0;70.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1170</x>
+      <y>270</y>
+      <w>160</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;70.0;140.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1220</x>
+      <y>480</y>
+      <w>90</w>
+      <h>250</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>10.0;230.0;70.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1650</x>
+      <y>150</y>
+      <w>210</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>ProgressDialog
+--
+
+--
++SetProgressState(ProgressState):void
++Display():void
++IsCanceledAction():boolean
++SetCancelActionListener(CancelActionListener):void</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1510</x>
+      <y>180</y>
+      <w>160</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>140.0;20.0;10.0;10.0</additional_attributes>
+  </element>
+</diagram>
