@@ -7,14 +7,13 @@ os:
   - linux
 
 install:
-  - mvn package
+  - mvn verify cobertura:cobertura
 
 after_success:
   - "mkdir AutoUpdateLauncherBin"
   - "find -name *.jar -exec cp {} ./AutoUpdateLauncherBin/ \\;"
   - "tar --gzip -cf AutoUpdateLauncher.tar.gz AutoUpdateLauncherBin"
   - "curl --ftp-create-dirs -T AutoUpdateLauncher.tar.gz -u $FTP_USER:$FTP_PASS ftp://$FTP_SERVER/AutoUpdateLauncher/"
-  - "mvn test cobertura:cobertura"
   - "bash <(curl -s https://codecov.io/bash)"
   
 notifications:
