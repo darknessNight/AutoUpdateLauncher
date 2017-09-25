@@ -1,13 +1,10 @@
 package pl.darknessNight.AutoUpdateLauncher;
 
-import org.apache.commons.net.ftp.FTP;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentMatchers;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -19,7 +16,7 @@ import static org.mockito.Mockito.*;
 class FtpFileDownloaderTest {
     static class FakeFTPClient extends FTPClient{
         @Override
-        public void RetrieveFileFromUrl(String url, OutputStream stream) throws IOException {
+        public void RetrieveDataToStreamFromUrl(String url, OutputStream stream) throws IOException {
             stream.write(url.getBytes());
         }
     }
@@ -38,7 +35,7 @@ class FtpFileDownloaderTest {
 
         byte[] result=fileDownloader.DownloadFileToMemory(testAddress);
 
-        verify(fakeFTPClient).RetrieveFileFromUrl(ArgumentMatchers.eq(testAddress), ArgumentMatchers.any());
+        verify(fakeFTPClient).RetrieveDataToStreamFromUrl(ArgumentMatchers.eq(testAddress), ArgumentMatchers.any());
         assertArrayEquals(testAddress.getBytes(),result);
     }
 
@@ -48,7 +45,7 @@ class FtpFileDownloaderTest {
         String testAddress="TestAddress";
         FtpFileDownloader fileDownloader=new FtpFileDownloader(fakeFTPClient);
 
-        Mockito.doThrow(IOException.class).when(fakeFTPClient).RetrieveFileFromUrl(Mockito.any(String.class),Mockito.any(OutputStream.class));
+        Mockito.doThrow(IOException.class).when(fakeFTPClient).RetrieveDataToStreamFromUrl(Mockito.any(String.class),Mockito.any(OutputStream.class));
 
         assertThrows(DownloadError.class,()->fileDownloader.DownloadFileToMemory(testAddress));
     }
@@ -64,7 +61,7 @@ class FtpFileDownloaderTest {
         File file=new File("./FileLocation.txt");
         file.deleteOnExit();
 
-        verify(fakeFTPClient).RetrieveFileFromUrl(ArgumentMatchers.eq(testAddress), ArgumentMatchers.any());
+        verify(fakeFTPClient).RetrieveDataToStreamFromUrl(ArgumentMatchers.eq(testAddress), ArgumentMatchers.any());
         assertTrue(file.exists() && file.isFile());
         assertArrayEquals(testAddress.getBytes(), Files.readAllBytes(file.toPath()));
     }
@@ -75,7 +72,7 @@ class FtpFileDownloaderTest {
         String testAddress="TestAddress";
         FtpFileDownloader fileDownloader=new FtpFileDownloader(fakeFTPClient);
 
-        Mockito.doThrow(IOException.class).when(fakeFTPClient).RetrieveFileFromUrl(Mockito.any(String.class),Mockito.any(OutputStream.class));
+        Mockito.doThrow(IOException.class).when(fakeFTPClient).RetrieveDataToStreamFromUrl(Mockito.any(String.class),Mockito.any(OutputStream.class));
 
         File file=new File("./FileLocation2.txt");
 
@@ -96,7 +93,7 @@ class FtpFileDownloaderTest {
         File file=new File(tempFilePath);
         file.deleteOnExit();
 
-        verify(fakeFTPClient).RetrieveFileFromUrl(ArgumentMatchers.eq(testAddress), ArgumentMatchers.any());
+        verify(fakeFTPClient).RetrieveDataToStreamFromUrl(ArgumentMatchers.eq(testAddress), ArgumentMatchers.any());
         assertTrue(file.exists() && file.isFile());
         assertArrayEquals(testAddress.getBytes(), Files.readAllBytes(file.toPath()));
     }
@@ -107,7 +104,7 @@ class FtpFileDownloaderTest {
         String testAddress="TestAddress";
         FtpFileDownloader fileDownloader=new FtpFileDownloader(fakeFTPClient);
 
-        Mockito.doThrow(IOException.class).when(fakeFTPClient).RetrieveFileFromUrl(Mockito.any(String.class),Mockito.any(OutputStream.class));
+        Mockito.doThrow(IOException.class).when(fakeFTPClient).RetrieveDataToStreamFromUrl(Mockito.any(String.class),Mockito.any(OutputStream.class));
 
         assertThrows(DownloadError.class,()->fileDownloader.DownloadFileToTemp(testAddress));
     }

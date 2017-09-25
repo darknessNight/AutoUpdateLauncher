@@ -1,5 +1,8 @@
 package pl.darknessNight.AutoUpdateLauncher;
 
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
+import java.io.OutputStream;
 import java.nio.file.NotDirectoryException;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,6 +42,11 @@ public class UniversalFileDownloader extends FileDownloader {
 
     void RemoveFileDownloader(String protocol) {
         fileDownloaderMap.remove(protocol);
+    }
+
+    @Override
+    protected void downloadToStream(String url, OutputStream stream){
+        throw new NotImplementedException();
     }
 
     @Override

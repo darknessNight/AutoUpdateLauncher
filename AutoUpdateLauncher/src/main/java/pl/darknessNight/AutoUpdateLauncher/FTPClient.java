@@ -17,7 +17,7 @@ public class FTPClient {
         ftpLowLevelClient =client;
     }
 
-    public void RetrieveFileFromUrl(String url, OutputStream stream) throws IOException{
+    public void RetrieveDataToStreamFromUrl(String url, OutputStream stream) throws IOException{
         ConnectToServerFromUrl(url);
         String filename=getFilenameFromUrl(url);
         RetrieveFile(filename,stream);
